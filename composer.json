@@ -1,0 +1,22 @@
+{
+  "name": "wapnen/google-cloud-vision-php",
+  "description": "A simple php library for the google cloud vision API ",
+  "keywords": ["google cloud vision api", "computer vision", "machine learning", "php"],
+  "type": "package",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "license": "MIT",
+    "authors": [{
+        "name": "Wapnen Gowok",
+        "email": "wapneng@gmail.com"
+    }],
+    "autoload": {
+        "psr-4": {
+            "GoogleCloudVision\\" : "GoogleCloudVision/"
+        }
+    },
+    "version": "1.0.0",
+    "minimum-stability": "dev"
+
+}
