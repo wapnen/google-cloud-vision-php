@@ -1,9 +1,9 @@
 <?php
-namespace GoogleCloudVision;
-use GoogleCloudVision\LatLngRect;
-use GoogleCloudVision\LatLng;
-use GoogleCloudVision\CropHintsParams;
-use GoogleCloudVision\WebDetectionParams;
+namespace GoogleCloudVision\Request;
+use GoogleCloudVision\Request\LatLngRect;
+use GoogleCloudVision\Request\LatLng;
+use GoogleCloudVision\Request\CropHintsParams;
+use GoogleCloudVision\Request\WebDetectionParams;
 use JsonSerializable;
 
 /**

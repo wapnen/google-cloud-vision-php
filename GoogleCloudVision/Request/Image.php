@@ -1,5 +1,5 @@
 <?php
-namespace GoogleCloudVision;
+namespace GoogleCloudVision\Request;
 use JsonSerializable;
 /**
  * Represents a Client image to perform Google Cloud Vision API tasks over.

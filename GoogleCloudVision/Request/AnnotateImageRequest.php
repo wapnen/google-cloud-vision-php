@@ -1,5 +1,5 @@
 <?php
-namespace GoogleCloudVision;
+namespace GoogleCloudVision\Request;
 use JsonSerializable;
 
 /**
@@ -23,7 +23,7 @@ class AnnotateImageRequest implements JsonSerializable
   */
   protected $imageContext;
 
-  
+
   public function setImage($image){
     $this->image = $image;
   }

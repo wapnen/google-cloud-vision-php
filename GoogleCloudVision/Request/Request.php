@@ -1,5 +1,5 @@
 <?php
-namespace GoogleCloudVision;
+namespace GoogleCloudVision\Request;
 /**
  *
  */

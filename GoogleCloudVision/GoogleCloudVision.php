@@ -1,9 +1,11 @@
 <?php
 namespace GoogleCloudVision;
 use Exception;
-use GoogleCloudVision\Image;
-use GoogleCloudVision\ImageSource;
-use GoogleCloudVision\AnnotateImageRequest;
+use GoogleCloudVision\Request\Image;
+use GoogleCloudVision\Request\ImageSource;
+use GoogleCloudVision\Request\AnnotateImageRequest;
+use GoogleCloudVision\Request\Feature;
+use GoogleCloudVision\Request\ImageContext;
 
  /**
   *

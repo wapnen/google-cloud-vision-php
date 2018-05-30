@@ -1,5 +1,5 @@
 <?php
-namespace GoogleCloudVision;
+namespace GoogleCloudVision\Request;
 use JsonSerializable;
 /**
  *Represents the type of Google Cloud Vision API detection to perform
