@@ -1,66 +1,70 @@
 <?php
 namespace GoogleCloudVision;
 use Exception;
-use GoogleCloudVision\Request\Image;
-use GoogleCloudVision\Request\ImageSource;
-use GoogleCloudVision\Request\AnnotateImageRequest;
-use GoogleCloudVision\Request\Feature;
-use GoogleCloudVision\Request\ImageContext;
-
+use GoogleCloudVision\Request\Request;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Request as GuzzleHttpRequest;
  /**
   *
   */
  class GoogleCloudVision
  {
+
+   /**
+   * @var Request
+   *
+   * The annotate image request
+   */
    protected $request;
-   protected $image;
-   protected $features = array();
-   protected $imageContext;
-   protected $annotateImage;
 
-   public function __construct(){
-     $this->annotateImage = new AnnotateImageRequest();
+   /**
+   * @var string
+   *
+   * Google api key for authentication
+   */
+   protected $apiKey;
+
+   /**
+   * @var Client
+   *
+   * GuzzleHttp Client
+   */
+   protected $client;
+
+   /**
+   * @var string
+   *
+   * Google api base url
+   */
+   const API_URL = "https://vision.googleapis.com/v1/images:annotate";
+
+   public function __construct($request, $apikey){
+     $this->request = new Request($request);
+     $this->apiKey = $apikey;
+     $this->client = new \GuzzleHttp\Client;
    }
 
-   public function setImage($imageString){
-     $this->image = new Image();
-     $this->image->content = $imageString;
+   public function annotate(){
+     try{
+            $url = "https://vision.googleapis.com/v1/images:annotate?key=".$this->apiKey;
+            $response = $this->client->post($url, ['json' => $this->request]);
+            $result = json_decode($response->getBody()->getContents());
+            return $result;
+
+        }
+        catch (RequestException $e) {
+            $response = $this->statusCodeHandling($e);
+            return $response;
+        }
    }
 
-   public function setImageUri($imageString){
-     $this->image = new Image();
-     $imageSource = new ImageSource();
-     $imageSource->setImageUri($imageString);
-     $this->image->setSource($imageSource);
-     return $this->image;
-   }
-
-   public function addFeature($type, $maxResults = 1, $model = "builtin/stable"){
-     $feature = new Feature();
-     $feature->setType($type);
-     $feature->setMaxResults($maxResults);
-     $feature->setModel($model);
-
-     array_push($this->features, $feature);
-   }
-
-   public function setImageContext(){
-     $this->imageContext = new ImageContext();
-     $this->annotateImage->setImageContext($this->imageContext);
-   }
-
-   public function imageContext(){
-     return $this->imageContext;
-   }
-
-   public function annotate()
-   {
-     //$annotate = $this->annotateImage;
-     $this->annotateImage->setImage($this->image);
-     $this->annotateImage->setFeatures($this->features);
-
-     return json_encode($this->annotateImage);
-   }
+   protected function statusCodeHandling($e)
+    {
+        $response = array("statuscode" => $e->getResponse()->getStatusCode(),
+        "error" => json_decode($e->getResponse()->getBody(true)->getContents()));
+        return $response;
+    }
 
  }
-  ?>
+ ?>

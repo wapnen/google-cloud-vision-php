@@ -1,5 +1,9 @@
 <?php
 namespace GoogleCloudVision\Request;
+use GoogleCloudVision\Request\Image;
+use GoogleCloudVision\Request\ImageSource;
+use GoogleCloudVision\Request\Feature;
+use GoogleCloudVision\Request\ImageContext;
 use JsonSerializable;
 
 /**
@@ -16,7 +20,7 @@ class AnnotateImageRequest implements JsonSerializable
   /**
    *Requested features
    */
-  protected $features;
+  protected $features = array();
 
   /**
   *Additional context that may accompany the image.
@@ -24,16 +28,29 @@ class AnnotateImageRequest implements JsonSerializable
   protected $imageContext;
 
 
-  public function setImage($image){
-    $this->image = $image;
+  public function setImage($imageString){
+    $this->image = new Image();
+    $this->image->content = $imageString;
   }
 
-  public function setFeatures($features){
-    $this->features = $features;
+  public function setImageUri($imageString){
+    $this->image = new Image();
+    $imageSource = new ImageSource();
+    $imageSource->setImageUri($imageString);
+    $this->image->setSource($imageSource);
+
   }
 
-  public function setImageContext($imageContext){
-    $this->imageContext = $imageContext;
+  public function setFeature($type, $maxResults = 1, $model = "builtin/stable"){
+    $feature = new Feature();
+    $feature->setType($type);
+    $feature->setMaxResults($maxResults);
+    $feature->setModel($model);
+    array_push($this->features, $feature);
+  }
+
+  public function setImageContext(){
+    $this->imageContext = new ImageContext();
   }
 
   public function getImage(){
