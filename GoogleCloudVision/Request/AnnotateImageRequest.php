@@ -30,7 +30,7 @@ class AnnotateImageRequest implements JsonSerializable
 
   public function setImage($imageString){
     $this->image = new Image();
-    $this->image->content = $imageString;
+    $this->image->setContent($imageString);
   }
 
   public function setImageUri($imageString){
