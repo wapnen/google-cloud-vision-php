@@ -14,11 +14,10 @@ $request1->getImageContext()->setCropHintsParams([1.333]);
 $request1->getImageContext()->setWebDetectionParams(false);
 
 echo(getenv("KEY"));
-$gcvRequest = new GoogleCloudVision([$request1], "Your_api_key");
+$gcvRequest = new GoogleCloudVision([$request1], "your_api_key");
 $response = $gcvRequest->annotate();
 
 echo json_encode($response);
-//echo json_encode($gcvRequest->jsonSerialize());
 
 
 

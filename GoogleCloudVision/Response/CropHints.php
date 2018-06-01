@@ -4,7 +4,7 @@ namespace GoogleCloudVision\Response;
 /**
  * Single crop hint that is used to generate a new crop when serving an image
  */
-class ClassName extends AnotherClass
+class CropHints
 {
   /**
   * @var BoundingPoly

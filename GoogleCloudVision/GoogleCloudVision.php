@@ -2,6 +2,7 @@
 namespace GoogleCloudVision;
 use Exception;
 use GoogleCloudVision\Request\Request;
+use GoogleCloudVision\Response\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Request as GuzzleHttpRequest;
@@ -17,6 +18,13 @@ use GuzzleHttp\Psr7\Request as GuzzleHttpRequest;
    * The annotate image request
    */
    protected $request;
+
+   /**
+   * @var Response
+   *
+   * The annotate image response
+   */
+   protected $response;
 
    /**
    * @var string
@@ -50,7 +58,8 @@ use GuzzleHttp\Psr7\Request as GuzzleHttpRequest;
             $url = "https://vision.googleapis.com/v1/images:annotate?key=".$this->apiKey;
             $response = $this->client->post($url, ['json' => $this->request]);
             $result = json_decode($response->getBody()->getContents());
-            return $result;
+            $this->response = new Response($result->responses);
+            return $this->response;
 
         }
         catch (RequestException $e) {

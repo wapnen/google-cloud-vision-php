@@ -4,7 +4,7 @@ namespace GoogleCloudVision\Response;
 /**
  * Metadata for web pages
  */
-class ClassName extends AnotherClass
+class WebPage
 {
 
   /**
