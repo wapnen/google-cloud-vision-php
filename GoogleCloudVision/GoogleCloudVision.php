@@ -58,8 +58,8 @@ use GuzzleHttp\Psr7\Request as GuzzleHttpRequest;
             $url = "https://vision.googleapis.com/v1/images:annotate?key=".$this->apiKey;
             $response = $this->client->post($url, ['json' => $this->request]);
             $result = json_decode($response->getBody()->getContents());
-            $this->response = new Response($result->responses);
-            return $this->response;
+
+            return $result;
 
         }
         catch (RequestException $e) {
